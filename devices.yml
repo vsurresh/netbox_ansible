@@ -4,8 +4,8 @@
   hosts: localhost
   gather_facts: False
   vars_files:
-    - devices_vars.yml
-    - organization_vars.yml
+    - vars/devices_vars.yml
+    - vars/organization_vars.yml
 
   tasks:
     - name: Create Manufacturer

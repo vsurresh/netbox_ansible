@@ -4,7 +4,7 @@
   hosts: localhost
   gather_facts: False
   vars_files:
-    - connections_vars.yml
+    - vars/connections_vars.yml
 
   tasks:
     - name: Create cables

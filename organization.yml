@@ -4,7 +4,7 @@
   hosts: localhost
   gather_facts: False
   vars_files:
-    - organization_vars.yml
+    - vars/organization_vars.yml
 
   tasks:
     - name: Create Site
