@@ -1,0 +1,29 @@
+---
+- name: "Organization Tab"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+  vars_files:
+    - organization_vars.yml
+
+  tasks:
+    - name: Create Site
+      netbox.netbox.netbox_site:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item }}"
+        state: present
+      loop: "{{ sites }}"
+    
+    - name: Create Rack
+      netbox.netbox.netbox_rack:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          site: "{{ item.site }}"
+          name: "{{ item.name }}"
+          width: "{{ item.width }}"
+          u_height: "{{ item.height }}"
+        state: present
+      loop: "{{ racks }}"

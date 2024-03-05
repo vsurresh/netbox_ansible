@@ -1,0 +1,136 @@
+---
+connections:
+  - name: DC-A1 to DC-B1
+    cable_type: mmf-om3
+    color: 111111
+    length: 10
+    term_a:
+      device: patch_panel_dc_a1
+      interface: dc_a1_rear_01
+      type: dcim.rearport
+    term_b:
+      device: patch_panel_dc_b1
+      interface: dc_b1_rear_01
+      type: dcim.rearport
+  - name: CORE-01 TO CORE-02 (Link-1, Leg-A)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-01
+      interface: Eth1/1
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_a1
+      interface: dc_a1_front_01
+      type: dcim.frontport
+  - name: CORE-01 TO CORE-02 (Link-1, Leg-B)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-02
+      interface: Eth1/1
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_b1
+      interface: dc_b1_front_01
+      type: dcim.frontport
+  - name: CORE-01 TO CORE-02 (Link-2, Leg-A)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-01
+      interface: Eth1/2
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_a1
+      interface: dc_a1_front_02
+      type: dcim.frontport
+  - name: CORE-01 TO CORE-02 (Link-2, Leg-B)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-02
+      interface: Eth1/2
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_b1
+      interface: dc_b1_front_02
+      type: dcim.frontport
+  - name: CORE-01 TO FW-01
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-01
+      interface: Eth1/10
+      type: dcim.interface
+    term_b:
+      device: DC-FW-01
+      interface: Ethernet1/1
+      type: dcim.interface
+  - name: CORE-02 TO FW-02
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-02
+      interface: Eth1/11
+      type: dcim.interface
+    term_b:
+      device: DC-FW-02
+      interface: Ethernet1/2
+      type: dcim.interface
+  - name: CORE-01 TO FW-02 (Leg-A)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-01
+      interface: Eth1/11
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_a1
+      interface: dc_a1_front_04
+      type: dcim.frontport
+  - name: CORE-01 TO FW-02 (Leg-B)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-FW-02
+      interface: Ethernet1/1
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_b1
+      interface: dc_b1_front_04
+      type: dcim.frontport
+  - name: CORE-02 TO FW-01 (Leg-A)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-Core-02
+      interface: Eth1/10
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_b1
+      interface: dc_b1_front_03
+      type: dcim.frontport
+  - name: CORE-02 TO FW-01 (Leg-B)
+    cable_type: mmf-om3
+    color: 00ffff
+    length: 3
+    term_a:
+      device: DC-FW-01
+      interface: Ethernet1/2
+      type: dcim.interface
+    term_b:
+      device: patch_panel_dc_a1
+      interface: dc_a1_front_03
+      type: dcim.frontport
+      
+  

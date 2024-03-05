@@ -1,0 +1,29 @@
+---
+- name: "Devices Tab"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+  vars_files:
+    - connections_vars.yml
+
+  tasks:
+    - name: Create cables
+      netbox.netbox.netbox_cable:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          description: "{{ item.name }}"
+          type: "{{ item.cable_type }}"
+          color: "{{ item.color }}"
+          length: "{{ item.length }}"
+          length_unit: m
+          termination_a_type: "{{ item.term_a.type }}"
+          termination_a:
+            device: "{{ item.term_a.device }}"
+            name: "{{ item.term_a.interface }}"
+          termination_b_type: "{{ item.term_b.type }}"
+          termination_b:
+            device: "{{ item.term_b.device }}"
+            name: "{{ item.term_b.interface }}"
+        state: present
+      loop: "{{ connections }}"

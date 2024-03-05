@@ -1,0 +1,145 @@
+---
+manufacturer:
+  - Cisco
+  - Palo Alto
+  - FS
+
+device_roles:
+  - name: Firewall
+    colour: f44336
+  - name: Core
+    colour: 9c27b0
+  - name: Distribution
+    colour: 00ffff
+  - name: Access
+    colour: cddc39
+  - name: Patch_Panel
+    colour: 795548
+
+device_types:
+  - model: Nexus7700 C7706
+    manufacturer: Cisco
+    height: 2
+    full_depth: true
+  - model: PA-3410
+    manufacturer: Palo Alto
+    height: 1
+    full_depth: false
+  - model: Patch-12-LC
+    manufacturer: FS
+    height: 1
+    full_depth: false
+
+devices:
+  - name: patch_panel_dc_a1
+    site: DC_01
+    type: Patch-12-LC
+    role: Patch_Panel
+    rack: R_01
+    face: front
+    position: 42
+    rear_ports:
+        name: dc_a1_rear_01
+        type: lc
+        positions: 8
+    front_ports:
+      - name: dc_a1_front_01
+        type: lc
+        rear_port: dc_a1_rear_01
+        rear_position: 1
+      - name: dc_a1_front_02
+        type: lc
+        rear_port: dc_a1_rear_01
+        rear_position: 2
+      - name: dc_a1_front_03
+        type: lc
+        rear_port: dc_a1_rear_01
+        rear_position: 3
+      - name: dc_a1_front_04
+        type: lc
+        rear_port: dc_a1_rear_01
+        rear_position: 4
+  - name: patch_panel_dc_b1
+    site: DC_01
+    type: Patch-12-LC
+    role: Patch_Panel
+    rack: L_01
+    face: front
+    position: 42
+    rear_ports:
+        name: dc_b1_rear_01
+        type: lc
+        positions: 8
+    front_ports:
+      - name: dc_b1_front_01
+        type: lc
+        rear_port: dc_b1_rear_01
+        rear_position: 1
+      - name: dc_b1_front_02
+        type: lc
+        rear_port: dc_b1_rear_01
+        rear_position: 2
+      - name: dc_b1_front_03
+        type: lc
+        rear_port: dc_b1_rear_01
+        rear_position: 3
+      - name: dc_b1_front_04
+        type: lc
+        rear_port: dc_b1_rear_01
+        rear_position: 4
+  - name: DC-Core-01
+    site: DC_01
+    type: Nexus7700 C7706
+    role: Core
+    rack: R_01
+    face: front
+    position: 10
+    interfaces:
+      - name: Eth1/1
+        type: SFP+ (10GE)
+      - name: Eth1/2
+        type: SFP+ (10GE)
+      - name: Eth1/10
+        type: SFP+ (10GE)
+      - name: Eth1/11
+        type: SFP+ (10GE)
+  - name: DC-Core-02
+    site: DC_01
+    type: Nexus7700 C7706
+    role: Core
+    rack: L_01
+    face: front
+    position: 10
+    interfaces:
+      - name: Eth1/1
+        type: SFP+ (10GE)
+      - name: Eth1/2
+        type: SFP+ (10GE)
+      - name: Eth1/10
+        type: SFP+ (10GE)
+      - name: Eth1/11
+        type: SFP+ (10GE)
+  - name: DC-FW-01
+    site: DC_01
+    type: PA-3410
+    role: Firewall
+    rack: R_01
+    face: front
+    position: 15
+    interfaces:
+    - name: Ethernet1/1
+      type: SFP+ (10GE)
+    - name: Ethernet1/2
+      type: SFP+ (10GE)
+  - name: DC-FW-02
+    site: DC_01
+    type: PA-3410
+    role: Firewall
+    rack: L_01
+    face: front
+    position: 15
+    interfaces:
+    - name: Ethernet1/1
+      type: SFP+ (10GE)
+    - name: Ethernet1/2
+      type: SFP+ (10GE)

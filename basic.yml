@@ -1,0 +1,14 @@
+---
+- name: "Basic Playbook"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  tasks:
+    - name: Create Manufacturer
+      netbox.netbox.netbox_manufacturer:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: Juniper
+        state: present

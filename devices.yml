@@ -1,0 +1,96 @@
+---
+- name: "Devices Tab"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+  vars_files:
+    - devices_vars.yml
+    - organization_vars.yml
+
+  tasks:
+    - name: Create Manufacturer
+      netbox.netbox.netbox_manufacturer:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item }}"
+        state: present
+      loop: "{{ manufacturer }}"
+
+    - name: Create Device Role
+      netbox.netbox.netbox_device_role:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item.name }}"
+          color: "{{ item.colour }}"
+          vm_role: false
+        state: present
+      loop: "{{ device_roles }}"
+    
+    - name: Create Device Type
+      netbox.netbox.netbox_device_type:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          model: "{{ item.model }}"
+          manufacturer: "{{ item.manufacturer }}"
+          u_height: "{{ item.height }}"
+          is_full_depth: "{{ item.full_depth }}"
+        state: present
+      loop: "{{ device_types }}"
+    
+    - name: Create Device
+      netbox.netbox.netbox_device:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item.name }}"
+          site: "{{ item.site }}"
+          device_type: "{{ item.type }}"
+          device_role: "{{ item.role }}"
+          rack: "{{ item.rack }}"
+          face: "{{ item.face }}"
+          position: "{{ item.position }}"
+        state: present
+      loop: "{{ devices }}"
+    
+    - name: Create Interface
+      netbox.netbox.netbox_device_interface:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          device: "{{ item.0.name }}"
+          name: "{{ item.1.name }}"
+          type: "{{ item.1.type }}"
+        state: present
+      loop: "{{ devices | subelements('interfaces', 'skip_missing=True') }}"
+      tags: interface
+    
+    - name: Create Rear Ports
+      netbox.netbox.netbox_rear_port:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item.rear_ports.name }}"
+          device: "{{ item.name }}"
+          type: "{{ item.rear_ports.type }}"
+          positions: "{{ item.rear_ports.positions }}"
+        state: present 
+      loop: "{{ devices }}"
+      when: "'rear_ports' in item"
+      tags: rear
+    
+    - name: Create Front Ports
+      netbox.netbox.netbox_front_port:
+        netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
+        netbox_token: "{{ lookup('env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ item.1.name }}"
+          device: "{{ item.0.name }}"
+          type: "{{ item.1.type }}"
+          rear_port: "{{ item.1.rear_port }}"
+          rear_port_position: "{{ item.1.rear_position }}"
+        state: present
+      loop: "{{ devices | subelements('front_ports', 'skip_missing=True') }}"
+      tags: front

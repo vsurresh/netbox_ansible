@@ -1,0 +1,13 @@
+---
+sites:
+  - DC_01
+
+racks:
+  - name: R_01
+    site: DC_01
+    width: 19
+    height: 42
+  - name: L_01
+    site: DC_01
+    width: 19
+    height: 42
