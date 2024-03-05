@@ -1,6 +1,6 @@
 # NetBox Ansible Automation
 
-This repository contains Ansible playbooks for automating the setup of NetBox, including the creation of sites, devices, and connections. It's designed to help streamline the configuration process and ensure a standardized setup.
+This repository contains Ansible playbooks for automating the setup of NetBox, including the creation of sites, devices, and connections.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ Before running these playbooks, make sure you have Ansible installed on your mac
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/netbox_ansible.git
+   git clone git@github.com:vsurresh/netbox_ansible.git
 
 2. Set up your environment variables:
 
@@ -23,9 +23,9 @@ export NETBOX_TOKEN=your_netbox_api_token
 3. Run the Playbooks:
 
 The playbooks should be run in a specific order to ensure dependencies are correctly managed. Start with the site configuration, followed by devices, and finally, connections.
-* ansible-playbook site.yml
+* ansible-playbook organization.yml
 * ansible-playbook devices.yml
-* ansible-playbook connections.yml
+* ansible-playbook connection.yml
 
 # Support
 If you encounter any issues or have questions, please file an issue on GitHub, and I'll do my best to address it.
